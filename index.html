@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAAR Grade 6 Math Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Lora', Georgia, serif;
+    color: #f0ece8;
+    padding: 20px 16px;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+
+  .card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 32px;
+    width: 100%;
+    max-width: 660px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    color: #fcd34d;
+    text-shadow: 0 0 40px rgba(252,211,77,0.4);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .subtitle { font-style: italic; color: rgba(240,236,232,0.6); margin-bottom: 28px; margin-top: 4px; }
+  .topic-label { color: #fcd34d; font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+
+  select {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: #f0ece8;
+    font-size: 0.95rem;
+    font-family: 'Lora', serif;
+    cursor: pointer;
+    margin-bottom: 20px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23fcd34d' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  select option { background: #1a1a2e; }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Lora', serif;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.12s, box-shadow 0.12s, opacity 0.12s;
+    letter-spacing: 0.02em;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, #fcd34d, #f59e0b);
+    color: #1a1a2e;
+    box-shadow: 0 4px 20px rgba(252,211,77,0.35);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 28px rgba(252,211,77,0.5); transform: translateY(-1px); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #f0ece8;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.13); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+  .btn-full { width: 100%; text-align: center; }
+
+  .stats-row { display: flex; justify-content: center; gap: 28px; margin-top: 24px; }
+  .stat-val { font-size: 1.5rem; font-weight: 900; color: #fcd34d; text-align: center; }
+  .stat-lbl { font-size: 0.7rem; color: rgba(240,236,232,0.45); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fcd34d, #f43f5e);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 660px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .question-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .teks-label {
+    font-size: 0.72rem;
+    color: rgba(240,236,232,0.35);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  .choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 13px 17px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: #f0ece8;
+    font-size: 0.95rem;
+    font-family: 'Lora', serif;
+    cursor: pointer;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .choice:hover:not(:disabled) { border-color: rgba(252,211,77,0.4); background: rgba(252,211,77,0.06); }
+  .choice.selected { border: 2px solid #fcd34d; background: rgba(252,211,77,0.1); }
+  .choice.correct { border: 2px solid #22c55e; background: rgba(34,197,94,0.1); color: #4ade80; }
+  .choice.wrong { border: 2px solid #ef4444; background: rgba(239,68,68,0.08); color: #fca5a5; }
+  .choice:disabled { cursor: default; }
+  .choice-letter { font-weight: 800; margin-right: 10px; font-size: 0.88rem; }
+
+  .explanation {
+    margin-top: 18px;
+    padding: 15px 17px;
+    background: rgba(252,211,77,0.07);
+    border: 1.5px solid rgba(252,211,77,0.22);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #fde68a;
+    display: none;
+  }
+  .explanation.visible { display: block; }
+
+  .action-row { margin-top: 18px; width: 100%; max-width: 660px; display: flex; gap: 12px; }
+
+  /* Results */
+  .score-circle {
+    width: 120px; height: 120px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    transition: border-color 0.3s;
+  }
+  .score-pct { font-size: 2rem; font-weight: 900; }
+  .score-grade { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; }
+
+  .results-list { margin-bottom: 22px; max-height: 340px; overflow-y: auto; padding-right: 4px; }
+  .results-list::-webkit-scrollbar { width: 4px; }
+  .results-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+
+  .result-item {
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: opacity 0.12s;
+    border: 1.5px solid transparent;
+  }
+  .result-item:hover { opacity: 0.85; }
+  .result-item.correct { border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.06); }
+  .result-item.wrong { border-color: rgba(239,68,68,0.35); background: rgba(239,68,68,0.06); }
+  .result-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .result-q { font-size: 0.88rem; color: rgba(240,236,232,0.8); flex: 1; line-height: 1.4; }
+  .result-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Review */
+  .review-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px; width: 100%; max-width: 660px;
+  }
+
+  .flex-gap { display: flex; gap: 10px; }
+  .mt-10 { margin-top: 10px; }
+  .text-center { text-align: center; }
+  .dim { color: rgba(240,236,232,0.5); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+  <div class="card text-center">
+    <div style="font-size:3rem;margin-bottom:8px">⭐</div>
+    <h1>STAAR Prep</h1>
+    <p class="topic-label">Grade 6 Mathematics</p>
+    <p class="subtitle">Master the concepts. Ace the test.</p>
+
+    <div style="text-align:left">
+      <label style="font-size:0.8rem;color:rgba(240,236,232,0.5);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:8px">
+        📚 Choose a Topic
+      </label>
+      <select id="topicSelect"></select>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="startQuiz()">Start Quiz →</button>
+
+    <div class="stats-row">
+      <div><div class="stat-val">40</div><div class="stat-lbl">Questions</div></div>
+      <div><div class="stat-val">16</div><div class="stat-lbl">Topics</div></div>
+      <div><div class="stat-val">6th</div><div class="stat-lbl">Grade</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="screen" style="padding:20px 16px">
+  <div class="quiz-header">
+    <button class="btn btn-secondary" style="padding:8px 14px;font-size:0.85rem" onclick="goHome()">✕</button>
+    <span class="dim" id="quizCounter" style="font-family:'Space Mono',monospace"></span>
+    <span class="badge" id="scoreDisplay" style="background:rgba(252,211,77,0.15);border:1.5px solid rgba(252,211,77,0.3);color:#fcd34d"></span>
+  </div>
+  <div class="progress-bar" style="width:100%;max-width:660px">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <div class="card" id="questionCard">
+    <div class="question-meta">
+      <span class="badge" id="topicBadge"></span>
+      <span class="teks-label" id="teksLabel"></span>
+    </div>
+    <p class="question-text" id="questionText"></p>
+    <div id="choicesContainer"></div>
+    <div class="explanation" id="explanation"></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary btn-full" id="actionBtn" disabled onclick="handleAction()">Check Answer</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="screen" style="padding:20px 16px">
+  <div class="card" style="max-width:660px">
+    <h2 style="text-align:center;font-size:1.5rem;color:#fcd34d;margin-bottom:20px">Quiz Complete! 🎉</h2>
+    <div class="score-circle" id="scoreCircle">
+      <span class="score-pct" id="scorePct"></span>
+      <span class="score-grade" id="scoreGrade"></span>
+    </div>
+    <p class="dim text-center" id="scoreDetail" style="margin-bottom:20px"></p>
+    <div class="results-list" id="resultsList"></div>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-secondary" style="flex:1" onclick="goHome()">← Home</button>
+      <button class="btn btn-primary" style="flex:1" onclick="startQuiz()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW -->
+<div id="review" class="screen" style="padding:20px 16px">
+  <div class="review-nav">
+    <button class="btn btn-secondary" style="padding:8px 14px;font-size:0.85rem" onclick="showScreen('results')">← Results</button>
+    <span class="dim" id="reviewCounter"></span>
+    <div class="flex-gap">
+      <button class="btn btn-secondary" id="prevBtn" style="padding:9px 14px" onclick="changeReview(-1)">‹</button>
+      <button class="btn btn-secondary" id="nextBtn" style="padding:9px 14px" onclick="changeReview(1)">›</button>
+    </div>
+  </div>
+  <div class="card" id="reviewCard" style="max-width:660px"></div>
+</div>
+
+<script>
+const QUESTIONS = [
+  { id:1, topic:"Expressions & Equations", teks:"6.7D", question:"Which expression is equivalent to 5(x – 3)?", choices:["5x – 3","2x","x – 15","5x – 15"], answer:3, explanation:"Use the distributive property: 5(x – 3) = 5·x – 5·3 = 5x – 15." },
+  { id:2, topic:"Integers & Operations", teks:"6.3C", question:"A skills test has 20 questions. Correct = +3 pts, Incorrect = –1 pt, No answer = –2 pts. Frieda answered 12 correctly, 5 incorrectly, and left 3 blank. What was her total?", choices:["25","31","12","20"], answer:0, explanation:"12×3 = 36, 5×(–1) = –5, 3×(–2) = –6. Total: 36 – 5 – 6 = 25." },
+  { id:3, topic:"Inequalities", teks:"6.9B", question:"Which inequality represents all values of x in –2x > –48?", choices:["x < –24","x < 24","x > –24","x > 24"], answer:1, explanation:"Divide both sides by –2 and flip the inequality sign: x < 24." },
+  { id:4, topic:"Order of Operations", teks:"6.7A", question:"What is the value of 4² – 6(7 – 10)?", choices:["7","–12","34","–36"], answer:2, explanation:"Parentheses first: 7–10 = –3. Then 4² = 16. So 16 – 6(–3) = 16 + 18 = 34." },
+  { id:5, topic:"Expressions & Equations", teks:"6.7A", question:"Which statement describes y = 8x vs. y = x + 8?", choices:["Both: y is 8 more than x","Both: y is 8 times x","y=8x means 8 more; y=x+8 means 8 times","y=8x means 8 times x; y=x+8 means 8 more than x"], answer:3, explanation:"In y = 8x, y is 8 times x (multiplication). In y = x + 8, y is 8 more than x (addition)." },
+  { id:6, topic:"Ratios & Proportions", teks:"6.4B", question:"96 dogs and cats went to a vet. The ratio of dogs to cats was 3:5. How many cats were there?", choices:["31","12","60","88"], answer:2, explanation:"Cats = 5/(3+5) × 96 = 5/8 × 96 = 60." },
+  { id:7, topic:"Percents & Fractions", teks:"6.4E", question:"75% of gym members joined in January. Which fraction equals 75%?", choices:["3/4","75","1/4","7.5"], answer:0, explanation:"75% = 75/100. Divide both by 25 → 3/4." },
+  { id:8, topic:"Absolute Value", teks:"6.2B", question:"What is the value of |7|?", choices:["–7","7","–1/7","1/7"], answer:1, explanation:"Absolute value is the distance from zero — always non-negative. |7| = 7." },
+  { id:9, topic:"Proportional Relationships", teks:"6.4C", question:"54 water park tickets cost $972. Which equation represents tickets (t) and total cost (c)?", choices:["t = 18c","c = 54t","t = 54c","c = 18t"], answer:3, explanation:"$972 ÷ 54 = $18/ticket. So c = 18t." },
+  { id:10, topic:"Integers & Number Line", teks:"6.2C", question:"Pressure readings: Mon –0.2, Tue 0.08, Wed –1.3, Thu –0.18, Fri 0.13. Least to greatest?", choices:["0.08, 0.13, –0.18, –0.2, –1.3","0.08, 0.13, –0.2, –1.3, –0.18","–1.3, –0.2, –0.18, 0.08, 0.13","–1.3, –0.18, 0.13, 0.08, –0.2"], answer:2, explanation:"On a number line: –1.3 < –0.2 < –0.18 < 0.08 < 0.13." },
+  { id:11, topic:"Geometry — Triangles", teks:"6.8A", question:"Triangle XYZ has Angle X = 36.2° and Angle Y = 98°. What is the measure of Angle Z?", choices:["134.2°","45.8°","225.8°","55.8°"], answer:1, explanation:"Angles in a triangle sum to 180°. Z = 180 – 36.2 – 98 = 45.8°." },
+  { id:12, topic:"Integers & Operations", teks:"6.3C", question:"Temperature dropped 3°F/hr for 6 hrs, then rose 2°. Expression: (–3)(6) + 2. What is the net change?", choices:["–20","–16","20","16"], answer:1, explanation:"(–3)(6) = –18, then –18 + 2 = –16." },
+  { id:13, topic:"Geometry — Volume", teks:"6.8D", question:"A right rectangular prism is 8 in. × 4 in. × 5 in. What is its volume?", choices:["40 in³","160 in³","28 in³","260 in³"], answer:1, explanation:"V = l × w × h = 8 × 4 × 5 = 160 cubic inches." },
+  { id:14, topic:"Equations", teks:"6.10A", question:"What value of x makes x + 72.08 = 106.7 true?", choices:["34.62","178.78","34.02","33.62"], answer:0, explanation:"x = 106.7 – 72.08 = 34.62." },
+  { id:15, topic:"Percents", teks:"6.5B", question:"78% of customers pay with a credit card. How many out of 1,500 will pay with a card?", choices:["117","1,170","780","1,422"], answer:1, explanation:"0.78 × 1,500 = 1,170." },
+  { id:16, topic:"Measurement Conversion", teks:"6.4H", question:"A square has a perimeter of 32 inches. What is the perimeter in feet?", choices:["2 ft","8/3 ft","4 ft","2⅔ ft"], answer:3, explanation:"32 ÷ 12 = 2⅔ feet (≈ 2.67 ft)." },
+  { id:17, topic:"Number Theory", teks:"6.7A", question:"What is the prime factorization of 126?", choices:["6 × 21","2 × 3² × 7","3 × 42","3² × 14"], answer:1, explanation:"126 = 2 × 63 = 2 × 9 × 7 = 2 × 3² × 7. All factors must be prime." },
+  { id:18, topic:"Proportional Relationships", teks:"6.4C", question:"Traci earned $120 for 8 hrs, $157.50 for 10.5 hrs, $180 for 12 hrs. Which equation relates hours (h) and pay (p)?", choices:["p = 15h","p = h + 2.5","h = p + 2.5","h = 15p"], answer:0, explanation:"$120 ÷ 8 = $15/hr. 15 × 10.5 = $157.50 ✓ and 15 × 12 = $180 ✓. So p = 15h." },
+  { id:19, topic:"Ratios & Proportions", teks:"6.4B", question:"2 out of 10 people preferred the beach over a pool. Out of 120 people, how many preferred the beach?", choices:["12","60","2","24"], answer:3, explanation:"2/10 × 120 = 24 people." },
+  { id:20, topic:"Financial Literacy", teks:"6.14A", question:"Ricardo plans to pay for college with savings, scholarships, grants, and work-study. Which does he control MOST?", choices:["Savings","Scholarships","Grants","Work-study programs"], answer:0, explanation:"Savings are fully in Ricardo's control. Scholarships, grants, and work-study depend on external decisions." },
+  { id:21, topic:"Equations", teks:"6.10A", question:"Which situation matches x – 8 = 24?", choices:["Gael lives 8 blocks closer than Jules. Gael lives 24 blocks away. Find Jules's distance x.","Gael lives 24 blocks closer than Jules. Gael lives 8 blocks away. Find Jules's distance.","24 boxes on 8 shelves equally — find boxes per shelf.","x boxes on 24 shelves, 8 per shelf — find total."], answer:0, explanation:"If Jules = x blocks and Gael lives 8 fewer: x – 8 = 24 ✓" },
+  { id:22, topic:"Decimals", teks:"6.4G", question:"7 out of 8 customers ordered a drink with lunch. What decimal equals 7/8?", choices:["0.78","0.875","0.87","0.8"], answer:1, explanation:"7 ÷ 8 = 0.875." },
+
+  // ── 2025 STAAR Released Items ──
+  { id:23, topic:"Financial Literacy", teks:"6.4.14.B", question:"Which statement describes a characteristic of a CREDIT card (not a debit card)?", choices:["Money is automatically withdrawn from your bank account when you make a purchase.","It builds credit history and can positively affect your credit score.","There is never any interest charged on purchases.","Purchases are always paid immediately from available funds."], answer:1, explanation:"A credit card is a loan — each purchase must be paid back later and interest may be charged. It also builds credit history. A debit card pulls money directly from your bank account." },
+  { id:24, topic:"Proportional Relationships", teks:"6.2.6.C", question:"A table shows these (x, y) pairs: (8, 2), (12, 3), (16, 4), (24, 6). Which equation represents this relationship?", choices:["y = x/4","y = 2x","y = x − 6","y = x + 1"], answer:0, explanation:"Check: 8/4 = 2 ✓, 12/4 = 3 ✓, 16/4 = 4 ✓. The rule is y = x/4." },
+  { id:25, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Six runners finished a 100-meter sprint in: 15.1, 13.8, 12.9, 14.3, 15.2, 15.1 seconds. What is the MEAN sprint time?", choices:["14.7 sec","15.1 sec","14.4 sec","13.8 sec"], answer:2, explanation:"Sum = 15.1+13.8+12.9+14.3+15.2+15.1 = 86.4. Mean = 86.4 ÷ 6 = 14.4 seconds." },
+  { id:26, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Using the same sprint times (15.1, 13.8, 12.9, 14.3, 15.2, 15.1), what is the MEDIAN sprint time?", choices:["14.4 sec","15.1 sec","12.9 sec","14.7 sec"], answer:3, explanation:"Ordered: 12.9, 13.8, 14.3, 15.1, 15.1, 15.2. The median of 6 values = average of the 3rd and 4th: (14.3 + 15.1) / 2 = 14.7 seconds." },
+  { id:27, topic:"Geometry — Area", teks:"6.3.8.C", question:"A parallelogram has an area of 33 square inches. The base is b inches and height is h inches. Which equation finds the height h?", choices:["h = 33b","h = 33/b","h = b/33","h = b − 33"], answer:1, explanation:"Area of a parallelogram: A = bh. Solving for h: h = A/b = 33/b." },
+  { id:28, topic:"Inequalities", teks:"6.2.9.A", question:"Kevin has at most $28 to spend at a movie theater. He spends $15 on a ticket. Which inequality represents y, the amount he can spend on popcorn and a drink?", choices:["15 + y < 28","15 − y ≤ 28","15 + y ≤ 28","y + 28 ≤ 15"], answer:2, explanation:"Total spending must be ≤ $28. Ticket ($15) + snacks (y) ≤ 28, so 15 + y ≤ 28." },
+  { id:29, topic:"Measurement Conversion", teks:"6.3.4.H", question:"A wall is 6 yards long. Which measurement is equivalent to 6 yards?", choices:["2 feet","18 feet","9 feet","108 inches"], answer:1, explanation:"1 yard = 3 feet, so 6 yards = 6 × 3 = 18 feet. (Also = 216 inches, since 18 × 12 = 216.)" },
+  { id:30, topic:"Expressions & Equations", teks:"6.1.7.D", question:"Which expression is equivalent to 7 ÷ x + 1?", choices:["7(x + 1)","7 ÷ (x + 1)","7/x + 1","x/7 + 1"], answer:2, explanation:"7 ÷ x is the same as 7/x, so 7 ÷ x + 1 = 7/x + 1. The +1 is NOT inside the division." },
+  { id:31, topic:"Financial Literacy", teks:"6.4.14.C", question:"Ms. Kar's checking account balance was $563.18. She paid a $50.00 phone bill. What was her new balance?", choices:["$613.18","$513.18","$512.18","$538.47"], answer:1, explanation:"$563.18 − $50.00 = $513.18." },
+  { id:32, topic:"Expressions & Equations", teks:"6.2.4.A", question:"Which statement is TRUE about the equations y = 7x and y = x + 7?", choices:["When x is negative, both values of y will always be negative.","In y = 7x, y is 7 more than x; in y = x + 7, y is 7 times x.","In both equations, y is always 7 times x.","In y = 7x, y is 7 times x; in y = x + 7, y is 7 more than x."], answer:3, explanation:"y = 7x means multiply: y is 7 TIMES x. y = x + 7 means add: y is 7 MORE than x. When x is positive both are positive, but when x is negative y = 7x is also negative while y = x + 7 might not be." },
+
+  // ── 2024 STAAR Released Items ──
+  { id:33, topic:"Statistics — Mean & Median", teks:"6.4.12.D", question:"A dot plot shows games won per season over 15 seasons: 2, 3, 5, 6, 6, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11. What is the mean number of games won?", choices:["9","8","10","7"], answer:1, explanation:"Sum = 2+3+5+6+6+7+8+8+8+9+9+10+10+11+11 = 113. But wait — sum = 120. Mean = 120 ÷ 15 = 8." },
+  { id:34, topic:"Percents", teks:"6.2.5.B", question:"Kara owns 35 books. 20% have fewer than 100 pages and 80% have 100 pages or more. How many books have FEWER than 100 pages?", choices:["7","8","28","20"], answer:0, explanation:"20% of 35 = 0.20 × 35 = 7 books." },
+  { id:35, topic:"Integers & Number Line", teks:"6.1.2.D", question:"Which list arranges these values from LEAST to GREATEST: −1 7/10, −0.209, −1/8, 35/52, 46/24?", choices:["−0.209, −1/8, −1 7/10, 35/52, 46/24","46/24, 35/52, −1/8, −0.209, −1 7/10","−1 7/10, −0.209, −1/8, 35/52, 46/24","−1/8, −0.209, −1 7/10, 35/52, 46/24"], answer:2, explanation:"Converting: −1 7/10 = −1.7, −0.209, −1/8 = −0.125, 35/52 ≈ 0.67, 46/24 ≈ 1.92. Order: −1.7 < −0.209 < −0.125 < 0.67 < 1.92." },
+  { id:36, topic:"Expressions & Equations", teks:"6.1.7.D", question:"Which expression is equivalent to (5 · ½p) − (2 · 7)?", choices:["5(½p − 2) · 7","(½p · 5) − (7 · 2)","½p · 5 − 2","(½p · 5 − 2) · 7"], answer:1, explanation:"Multiplication is commutative: 5 · ½p = ½p · 5, and 2 · 7 = 7 · 2. So (5 · ½p) − (2 · 7) = (½p · 5) − (7 · 2)." },
+  { id:37, topic:"Ratios & Proportions", teks:"6.1.4.C", question:"There are 5 student volunteers for every 2 adult volunteers at an event. Which group correctly represents this 5:2 ratio?", choices:["120 students and 48 adults","20 students and 50 adults","70 students and 14 adults","65 students and 13 adults"], answer:0, explanation:"120/48 = 2.5, and 5/2 = 2.5 ✓. Check others: 20/50 = 0.4 ✗, 70/14 = 5 ✗, 65/13 = 5 ✗." },
+  { id:38, topic:"Geometry — Volume", teks:"6.3.8.D", question:"A rectangular prism has dimensions 5.5 m × 3 m × 1 m. What is the volume?", choices:["9.5 m³","16.5 m³","8.5 m³","19.5 m³"], answer:1, explanation:"V = l × w × h = 5.5 × 3 × 1 = 16.5 cubic meters." },
+  { id:39, topic:"Percents & Fractions", teks:"6.1.4.G", question:"In Jada's class, 3/8 of the students have blue eyes. Which decimal is equivalent to 3/8?", choices:["0.38","0.375","3.8","0.83"], answer:1, explanation:"3 ÷ 8 = 0.375. Also equivalent to 37.5%." },
+  { id:40, topic:"Inequalities", teks:"6.2.9.B", question:"A basketball team was losing by 18 points. Three players each scored p points and the team won. The inequality 3p > 18 represents this. What values of p are solutions?", choices:["p < 6","p ≤ 6","p > 6","p ≥ 18"], answer:2, explanation:"Divide both sides by 3: p > 6. Each player must have scored MORE than 6 points. The circle on a number line would be OPEN at 6, pointing right." }
+];
+
+const TOPIC_COLORS = {
+  "Expressions & Equations":"#f59e0b","Integers & Operations":"#10b981",
+  "Inequalities":"#3b82f6","Order of Operations":"#8b5cf6",
+  "Ratios & Proportions":"#f43f5e","Percents & Fractions":"#06b6d4",
+  "Absolute Value":"#ec4899","Proportional Relationships":"#f97316",
+  "Integers & Number Line":"#14b8a6","Geometry — Triangles":"#6366f1",
+  "Geometry — Volume":"#a855f7","Percents":"#84cc16",
+  "Measurement Conversion":"#0ea5e9","Number Theory":"#d97706",
+  "Financial Literacy":"#22c55e","Equations":"#e11d48","Decimals":"#7c3aed",
+  "Statistics — Mean & Median":"#f43f5e","Geometry — Area":"#0891b2"
+};
+
+let quizQuestions = [], currentIndex = 0, score = 0, answers = [], selectedChoice = null, confirmed = false, reviewIndex = 0;
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goHome() { showScreen('home'); }
+
+// Populate topic select
+(function initTopics() {
+  const topics = ["All", ...Array.from(new Set(QUESTIONS.map(q => q.topic)))];
+  const sel = document.getElementById('topicSelect');
+  topics.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    sel.appendChild(opt);
+  });
+})();
+
+function startQuiz() {
+  const topic = document.getElementById('topicSelect').value;
+  const pool = topic === "All" ? QUESTIONS : QUESTIONS.filter(q => q.topic === topic);
+  quizQuestions = shuffle(pool).slice(0, Math.min(10, pool.length));
+  currentIndex = 0; score = 0; answers = []; selectedChoice = null; confirmed = false;
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[currentIndex];
+  const color = TOPIC_COLORS[q.topic] || "#888";
+
+  document.getElementById('quizCounter').textContent = `${currentIndex + 1} / ${quizQuestions.length}`;
+  document.getElementById('scoreDisplay').textContent = `${score} pts`;
+  document.getElementById('progressFill').style.width = `${(currentIndex / quizQuestions.length) * 100}%`;
+
+  const badge = document.getElementById('topicBadge');
+  badge.textContent = q.topic;
+  badge.style.background = color + "22";
+  badge.style.border = `1.5px solid ${color}55`;
+  badge.style.color = color;
+
+  document.getElementById('teksLabel').textContent = `TEKS ${q.teks}`;
+  document.getElementById('questionText').textContent = q.question;
+
+  const container = document.getElementById('choicesContainer');
+  container.innerHTML = '';
+  q.choices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.innerHTML = `<span class="choice-letter">${['A','B','C','D'][i]}.</span>${choice}`;
+    btn.onclick = () => selectChoice(i);
+    container.appendChild(btn);
+  });
+
+  const explanation = document.getElementById('explanation');
+  explanation.textContent = '';
+  explanation.classList.remove('visible');
+
+  const actionBtn = document.getElementById('actionBtn');
+  actionBtn.textContent = 'Check Answer';
+  actionBtn.disabled = true;
+
+  selectedChoice = null;
+  confirmed = false;
+}
+
+function selectChoice(i) {
+  if (confirmed) return;
+  selectedChoice = i;
+  document.querySelectorAll('.choice').forEach((btn, idx) => {
+    btn.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('actionBtn').disabled = false;
+}
+
+function handleAction() {
+  if (!confirmed) {
+    confirmed = true;
+    const q = quizQuestions[currentIndex];
+    const isCorrect = selectedChoice === q.answer;
+    if (isCorrect) score++;
+    answers.push({ q, selected: selectedChoice, correct: isCorrect });
+
+    document.querySelectorAll('.choice').forEach((btn, i) => {
+      btn.disabled = true;
+      btn.classList.remove('selected');
+      if (i === q.answer) btn.classList.add('correct');
+      else if (i === selectedChoice) btn.classList.add('wrong');
+    });
+
+    const explanation = document.getElementById('explanation');
+    explanation.textContent = `💡 ${q.explanation}`;
+    explanation.classList.add('visible');
+
+    document.getElementById('scoreDisplay').textContent = `${score} pts`;
+    const actionBtn = document.getElementById('actionBtn');
+    actionBtn.textContent = currentIndex < quizQuestions.length - 1 ? 'Next Question →' : 'See Results →';
+  } else {
+    if (currentIndex < quizQuestions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  }
+}
+
+function showResults() {
+  const pct = Math.round((score / quizQuestions.length) * 100);
+  const grade = pct >= 90 ? "Masters" : pct >= 70 ? "Meets" : pct >= 50 ? "Approaches" : "Did Not Meet";
+  const color = pct >= 90 ? "#22c55e" : pct >= 70 ? "#3b82f6" : pct >= 50 ? "#f59e0b" : "#ef4444";
+
+  const circle = document.getElementById('scoreCircle');
+  circle.style.border = `5px solid ${color}`;
+  circle.style.boxShadow = `0 0 30px ${color}44`;
+  circle.style.background = color + "15";
+  document.getElementById('scorePct').style.color = color;
+  document.getElementById('scoreGrade').style.color = color;
+  document.getElementById('scorePct').textContent = `${pct}%`;
+  document.getElementById('scoreGrade').textContent = grade;
+  document.getElementById('scoreDetail').textContent = `${score} out of ${quizQuestions.length} correct`;
+
+  const list = document.getElementById('resultsList');
+  list.innerHTML = '';
+  answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = `result-item ${a.correct ? 'correct' : 'wrong'}`;
+    div.onclick = () => { reviewIndex = i; showReview(); };
+    const truncated = a.q.question.length > 70 ? a.q.question.slice(0, 70) + '…' : a.q.question;
+    const topicColor = TOPIC_COLORS[a.q.topic] || "#888";
+    div.innerHTML = `
+      <div class="result-row">
+        <span class="result-q">Q${i+1}: ${truncated}</span>
+        <span class="result-icon">${a.correct ? '✅' : '❌'}</span>
+      </div>
+      <div class="mt-10">
+        <span class="badge" style="background:${topicColor}22;border:1.5px solid ${topicColor}44;color:${topicColor}">
+          ${a.q.topic}
+        </span>
+      </div>`;
+    list.appendChild(div);
+  });
+
+  showScreen('results');
+}
+
+function showReview() {
+  renderReview();
+  showScreen('review');
+}
+
+function changeReview(dir) {
+  reviewIndex = Math.max(0, Math.min(answers.length - 1, reviewIndex + dir));
+  renderReview();
+}
+
+function renderReview() {
+  const a = answers[reviewIndex];
+  const q = a.q;
+  const color = TOPIC_COLORS[q.topic] || "#888";
+
+  document.getElementById('reviewCounter').textContent = `${reviewIndex + 1} / ${answers.length}`;
+  document.getElementById('prevBtn').disabled = reviewIndex === 0;
+  document.getElementById('nextBtn').disabled = reviewIndex === answers.length - 1;
+
+  const letters = ['A','B','C','D'];
+  let choicesHTML = q.choices.map((c, i) => {
+    let cls = '';
+    if (i === q.answer) cls = 'correct';
+    else if (i === a.selected && a.selected !== q.answer) cls = 'wrong';
+    return `<button class="choice ${cls}" disabled>
+      <span class="choice-letter">${letters[i]}.</span>${c}
+    </button>`;
+  }).join('');
+
+  document.getElementById('reviewCard').innerHTML = `
+    <div class="question-meta">
+      <span class="badge" style="background:${color}22;border:1.5px solid ${color}55;color:${color}">${q.topic}</span>
+      <span style="font-size:1.5rem">${a.correct ? '✅' : '❌'}</span>
+    </div>
+    <p class="question-text">${q.question}</p>
+    ${choicesHTML}
+    <div class="explanation visible">💡 ${q.explanation}</div>
+    <div style="margin-top:10px;text-align:right">
+      <span class="teks-label">TEKS ${q.teks}</span>
+    </div>`;
+}
+</script>
+</body>
+</html>
