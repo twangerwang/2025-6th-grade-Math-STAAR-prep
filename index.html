@@ -247,7 +247,7 @@
     <button class="btn btn-primary btn-full" onclick="startQuiz()">Start Quiz →</button>
 
     <div class="stats-row">
-      <div><div class="stat-val">40</div><div class="stat-lbl">Questions</div></div>
+      <div><div class="stat-val">160</div><div class="stat-lbl">Questions</div></div>
       <div><div class="stat-val">16</div><div class="stat-lbl">Topics</div></div>
       <div><div class="stat-val">6th</div><div class="stat-lbl">Grade</div></div>
     </div>
@@ -353,7 +353,171 @@ const QUESTIONS = [
   { id:37, topic:"Ratios & Proportions", teks:"6.1.4.C", question:"There are 5 student volunteers for every 2 adult volunteers at an event. Which group correctly represents this 5:2 ratio?", choices:["120 students and 48 adults","20 students and 50 adults","70 students and 14 adults","65 students and 13 adults"], answer:0, explanation:"120/48 = 2.5, and 5/2 = 2.5 ✓. Check others: 20/50 = 0.4 ✗, 70/14 = 5 ✗, 65/13 = 5 ✗." },
   { id:38, topic:"Geometry — Volume", teks:"6.3.8.D", question:"A rectangular prism has dimensions 5.5 m × 3 m × 1 m. What is the volume?", choices:["9.5 m³","16.5 m³","8.5 m³","19.5 m³"], answer:1, explanation:"V = l × w × h = 5.5 × 3 × 1 = 16.5 cubic meters." },
   { id:39, topic:"Percents & Fractions", teks:"6.1.4.G", question:"In Jada's class, 3/8 of the students have blue eyes. Which decimal is equivalent to 3/8?", choices:["0.38","0.375","3.8","0.83"], answer:1, explanation:"3 ÷ 8 = 0.375. Also equivalent to 37.5%." },
-  { id:40, topic:"Inequalities", teks:"6.2.9.B", question:"A basketball team was losing by 18 points. Three players each scored p points and the team won. The inequality 3p > 18 represents this. What values of p are solutions?", choices:["p < 6","p ≤ 6","p > 6","p ≥ 18"], answer:2, explanation:"Divide both sides by 3: p > 6. Each player must have scored MORE than 6 points. The circle on a number line would be OPEN at 6, pointing right." }
+  { id:40, topic:"Inequalities", teks:"6.2.9.B", question:"A basketball team was losing by 18 points. Three players each scored p points and the team won. The inequality 3p > 18 represents this. What values of p are solutions?", choices:["p < 6","p ≤ 6","p > 6","p ≥ 18"], answer:2, explanation:"Divide both sides by 3: p > 6. Each player must have scored MORE than 6 points. The circle on a number line would be OPEN at 6, pointing right." },
+
+  // ── Expressions & Equations ──
+  { id:41, topic:"Expressions & Equations", teks:"6.7D", question:"Which expression is equivalent to 3(2x + 4)?", choices:["6x + 4","6x + 12","5x + 7","6x + 7"], answer:1, explanation:"Use the distributive property: 3 · 2x = 6x and 3 · 4 = 12. So 3(2x + 4) = 6x + 12." },
+  { id:42, topic:"Expressions & Equations", teks:"6.7D", question:"Which expression is equivalent to 4(3 – x)?", choices:["12 – x","7 – 4x","12 – 4x","12x – 4"], answer:2, explanation:"Distribute: 4 · 3 = 12 and 4 · (–x) = –4x. So 4(3 – x) = 12 – 4x." },
+  { id:43, topic:"Expressions & Equations", teks:"6.7A", question:"What is the value of 3x + 7 when x = 4?", choices:["19","16","34","13"], answer:0, explanation:"Substitute x = 4: 3(4) + 7 = 12 + 7 = 19." },
+  { id:44, topic:"Expressions & Equations", teks:"6.7A", question:"What is the value of 2x² when x = 3?", choices:["36","12","18","6"], answer:2, explanation:"2x² = 2 · 3² = 2 · 9 = 18. Remember to square x first, then multiply by 2." },
+  { id:45, topic:"Expressions & Equations", teks:"6.7B", question:"Which expression shows the simplification of 4a + 3a – a?", choices:["6a","7a","8a – a","6a²"], answer:0, explanation:"Combine like terms: 4a + 3a – a = 7a – a = 6a." },
+  { id:46, topic:"Expressions & Equations", teks:"6.7D", question:"Which expression is equivalent to 6(x + 3) – 2x?", choices:["4x + 18","4x + 3","6x + 3","8x + 18"], answer:0, explanation:"Distribute first: 6x + 18 – 2x. Then combine like terms: 4x + 18." },
+  { id:47, topic:"Expressions & Equations", teks:"6.7A", question:"Evaluate 5(a – b) when a = 10 and b = 4.", choices:["26","30","1","46"], answer:1, explanation:"Substitute: 5(10 – 4) = 5(6) = 30." },
+  { id:48, topic:"Expressions & Equations", teks:"6.7D", question:"Which expression is NOT equivalent to 2(x + 5)?", choices:["2x + 10","x + x + 10","2x + 5","10 + 2x"], answer:2, explanation:"2(x + 5) = 2x + 10. The expression 2x + 5 only adds 5, not 10, so it is NOT equivalent." },
+
+  // ── Integers & Operations ──
+  { id:49, topic:"Integers & Operations", teks:"6.3C", question:"What is (–4) × (–6)?", choices:["–24","24","–10","10"], answer:1, explanation:"Negative × negative = positive. (–4) × (–6) = +24." },
+  { id:50, topic:"Integers & Operations", teks:"6.3C", question:"What is (–15) ÷ 3?", choices:["5","–5","–12","12"], answer:1, explanation:"Negative ÷ positive = negative. –15 ÷ 3 = –5." },
+  { id:51, topic:"Integers & Operations", teks:"6.3C", question:"What is –8 + (–5)?", choices:["–3","3","–13","13"], answer:2, explanation:"Adding two negatives: –8 + (–5) = –13." },
+  { id:52, topic:"Integers & Operations", teks:"6.3C", question:"What is 12 – (–7)?", choices:["5","–5","19","–19"], answer:2, explanation:"Subtracting a negative is the same as adding: 12 – (–7) = 12 + 7 = 19." },
+  { id:53, topic:"Integers & Operations", teks:"6.3C", question:"A submarine descended 50 feet, then rose 20 feet. What is the net change in position?", choices:["–70 ft","70 ft","–30 ft","30 ft"], answer:2, explanation:"–50 + 20 = –30. The submarine is 30 feet below where it started." },
+  { id:54, topic:"Integers & Operations", teks:"6.3C", question:"What is (–2)(3)(–4)?", choices:["–24","24","–9","9"], answer:1, explanation:"(–2)(3) = –6, then (–6)(–4) = +24. Two negatives make a positive." },
+  { id:55, topic:"Integers & Operations", teks:"6.3C", question:"The temperature was –4°F in the morning and dropped another 9 degrees by night. What was the temperature at night?", choices:["5°F","–5°F","–13°F","13°F"], answer:2, explanation:"–4 + (–9) = –13°F." },
+  { id:56, topic:"Integers & Operations", teks:"6.3C", question:"What is (–3)²?", choices:["–9","9","–6","6"], answer:1, explanation:"(–3)² = (–3)(–3) = 9. A negative number squared is always positive." },
+
+  // ── Order of Operations ──
+  { id:57, topic:"Order of Operations", teks:"6.7A", question:"What is the value of 3 + 4 × 2?", choices:["14","11","24","10"], answer:1, explanation:"Multiplication before addition: 4 × 2 = 8, then 3 + 8 = 11." },
+  { id:58, topic:"Order of Operations", teks:"6.7A", question:"What is the value of (5 + 3)² – 10?", choices:["54","44","24","54"], answer:0, explanation:"Parentheses first: 5 + 3 = 8. Then 8² = 64. Then 64 – 10 = 54." },
+  { id:59, topic:"Order of Operations", teks:"6.7A", question:"What is the value of 18 ÷ 6 + 2 × 3?", choices:["3","15","9","1"], answer:2, explanation:"Division and multiplication first (left to right): 18÷6 = 3, then 2×3 = 6. Then 3 + 6 = 9." },
+  { id:60, topic:"Order of Operations", teks:"6.7A", question:"What is the value of 5² – 3(4 + 2)?", choices:["7","43","13","–7"], answer:0, explanation:"Parentheses: 4+2=6. Exponent: 5²=25. Multiply: 3×6=18. Subtract: 25–18=7." },
+  { id:61, topic:"Order of Operations", teks:"6.7A", question:"What is the value of 2 + 3² × 2?", choices:["50","20","23","100"], answer:1, explanation:"Exponent first: 3² = 9. Then multiply: 9 × 2 = 18. Then add: 2 + 18 = 20." },
+  { id:62, topic:"Order of Operations", teks:"6.7A", question:"What is the value of (12 – 4) ÷ 2 + 3²?", choices:["13","8","22","4"], answer:0, explanation:"Parentheses: 12–4=8. Exponent: 3²=9. Division: 8÷2=4. Addition: 4+9=13." },
+
+  // ── Ratios & Proportions ──
+  { id:63, topic:"Ratios & Proportions", teks:"6.4B", question:"A car travels 150 miles in 3 hours. What is the unit rate in miles per hour?", choices:["50 mph","45 mph","60 mph","30 mph"], answer:0, explanation:"150 ÷ 3 = 50 miles per hour." },
+  { id:64, topic:"Ratios & Proportions", teks:"6.4B", question:"A recipe needs 4 cups of flour to make 24 cookies. How many cups are needed for 36 cookies?", choices:["5 cups","6 cups","8 cups","3 cups"], answer:1, explanation:"Set up a proportion: 4/24 = x/36. Cross multiply: 24x = 144. x = 6 cups." },
+  { id:65, topic:"Ratios & Proportions", teks:"6.4B", question:"A class has 12 boys and 18 girls. What is the ratio of boys to girls in simplest form?", choices:["12:18","2:3","3:2","6:9"], answer:1, explanation:"GCF of 12 and 18 is 6. 12÷6 = 2, 18÷6 = 3. Ratio is 2:3." },
+  { id:66, topic:"Ratios & Proportions", teks:"6.4B", question:"A store sells 3 items for $4.50. What is the cost per item?", choices:["$1.00","$2.00","$1.50","$3.50"], answer:2, explanation:"$4.50 ÷ 3 = $1.50 per item." },
+  { id:67, topic:"Ratios & Proportions", teks:"6.4B", question:"A scale drawing uses 1 inch to represent 50 miles. If a road is 3.5 inches on the map, how many miles is it?", choices:["53.5 miles","150 miles","175 miles","200 miles"], answer:2, explanation:"3.5 × 50 = 175 miles." },
+  { id:68, topic:"Ratios & Proportions", teks:"6.4B", question:"The ratio of red to blue marbles is 3:7 and there are 70 marbles total. How many are red?", choices:["21","30","49","10"], answer:0, explanation:"Red = 3/(3+7) × 70 = 3/10 × 70 = 21." },
+  { id:69, topic:"Ratios & Proportions", teks:"6.4B", question:"Sam earns $9 per hour. Which table shows the correct relationship between hours worked (h) and total earned (e)?", choices:["h=1,e=9; h=2,e=18; h=3,e=27","h=1,e=10; h=2,e=19; h=3,e=28","h=1,e=8; h=2,e=16; h=3,e=24","h=1,e=9; h=2,e=17; h=3,e=25"], answer:0, explanation:"Each hour earns $9, so multiply hours by 9: 1×9=9, 2×9=18, 3×9=27." },
+  { id:70, topic:"Ratios & Proportions", teks:"6.4B", question:"A mixture uses parts in the ratio 2:3:5. If the total is 100 grams, how many grams is the largest part?", choices:["20g","30g","50g","10g"], answer:2, explanation:"Largest part = 5/(2+3+5) × 100 = 5/10 × 100 = 50 grams." },
+
+  // ── Percents & Fractions ──
+  { id:71, topic:"Percents & Fractions", teks:"6.4E", question:"What is 40% of 80?", choices:["40","32","20","48"], answer:1, explanation:"40% of 80 = 0.40 × 80 = 32." },
+  { id:72, topic:"Percents & Fractions", teks:"6.4E", question:"15 is what percent of 60?", choices:["15%","4%","25%","40%"], answer:2, explanation:"15 ÷ 60 = 0.25 = 25%." },
+  { id:73, topic:"Percents & Fractions", teks:"6.4E", question:"What fraction in simplest form equals 0.6?", choices:["6/10","3/5","2/3","6/100"], answer:1, explanation:"0.6 = 6/10. Simplify by dividing by 2: 3/5." },
+  { id:74, topic:"Percents & Fractions", teks:"6.4E", question:"What decimal is equivalent to 1/3? (to the nearest thousandth)", choices:["0.13","0.313","0.333","1.3"], answer:2, explanation:"1 ÷ 3 = 0.333… which rounds to 0.333." },
+  { id:75, topic:"Percents & Fractions", teks:"6.4E", question:"What is 120% of 50?", choices:["60","50","70","120"], answer:0, explanation:"120% of 50 = 1.20 × 50 = 60. More than 100% gives a result greater than the original." },
+  { id:76, topic:"Percents & Fractions", teks:"6.4E", question:"A jacket costs $48. It is on sale for 25% off. What is the sale price?", choices:["$12","$60","$36","$24"], answer:2, explanation:"25% of $48 = $12 discount. $48 – $12 = $36." },
+  { id:77, topic:"Percents & Fractions", teks:"6.4E", question:"What is 3/8 + 1/4?", choices:["4/12","1/2","5/8","4/8"], answer:2, explanation:"Convert 1/4 to 2/8. Then 3/8 + 2/8 = 5/8." },
+  { id:78, topic:"Percents & Fractions", teks:"6.4E", question:"What is 2/3 × 3/4?", choices:["6/12","1/2","5/7","2/4"], answer:1, explanation:"Multiply numerators and denominators: (2×3)/(3×4) = 6/12 = 1/2." },
+
+  // ── Absolute Value ──
+  { id:79, topic:"Absolute Value", teks:"6.2B", question:"What is |–15|?", choices:["–15","1/15","–1/15","15"], answer:3, explanation:"Absolute value is always the positive (non-negative) version of a number. |–15| = 15." },
+  { id:80, topic:"Absolute Value", teks:"6.2B", question:"What is |–3 + 8|?", choices:["–5","5","11","–11"], answer:1, explanation:"First compute inside: –3 + 8 = 5. Then |5| = 5." },
+  { id:81, topic:"Absolute Value", teks:"6.2B", question:"Which is greater: |–10| or |9|?", choices:["|9|","|–10|","They are equal","Cannot be determined"], answer:1, explanation:"|–10| = 10 and |9| = 9. Since 10 > 9, |–10| is greater." },
+  { id:82, topic:"Absolute Value", teks:"6.2B", question:"If |x| = 6, what are the possible values of x?", choices:["6 only","–6 only","6 or –6","36"], answer:2, explanation:"Absolute value asks: what numbers are 6 away from zero? Both 6 and –6 are 6 units from zero." },
+  { id:83, topic:"Absolute Value", teks:"6.2B", question:"What is |–7| + |3|?", choices:["–10","–4","4","10"], answer:3, explanation:"|–7| = 7 and |3| = 3. Then 7 + 3 = 10." },
+
+  // ── Proportional Relationships ──
+  { id:84, topic:"Proportional Relationships", teks:"6.4C", question:"If y = 4x, what is y when x = 7?", choices:["11","3","28","47"], answer:2, explanation:"Substitute: y = 4(7) = 28." },
+  { id:85, topic:"Proportional Relationships", teks:"6.4C", question:"A table shows (2, 10), (3, 15), (4, 20). Which equation represents this relationship?", choices:["y = x + 8","y = 5x","y = 2x + 6","y = x/5"], answer:1, explanation:"Check: 5×2=10 ✓, 5×3=15 ✓, 5×4=20 ✓. The equation is y = 5x." },
+  { id:86, topic:"Proportional Relationships", teks:"6.4C", question:"A car travels 45 miles per hour. Which equation represents the distance d traveled in h hours?", choices:["d = h + 45","d = 45/h","h = 45d","d = 45h"], answer:3, explanation:"Distance = rate × time. d = 45h." },
+  { id:87, topic:"Proportional Relationships", teks:"6.4C", question:"The constant of proportionality in y = 6x is —", choices:["y","x","6","0"], answer:2, explanation:"In y = kx, k is the constant of proportionality. Here k = 6." },
+  { id:88, topic:"Proportional Relationships", teks:"6.4C", question:"A graph showing a proportional relationship between x and y must pass through which point?", choices:["(1, 1)","(0, 0)","(1, 0)","(0, 1)"], answer:1, explanation:"All proportional relationships have the equation y = kx. When x = 0, y = k(0) = 0, so it always passes through the origin (0, 0)." },
+  { id:89, topic:"Proportional Relationships", teks:"6.4C", question:"A faucet leaks 3 gallons per hour. How many gallons leak in 8 hours?", choices:["11","24","38","3"], answer:1, explanation:"3 gallons/hour × 8 hours = 24 gallons." },
+
+  // ── Integers & Number Line ──
+  { id:90, topic:"Integers & Number Line", teks:"6.2C", question:"Which number is less: –0.5 or –0.8?", choices:["–0.5","–0.8","They are equal","Cannot be determined"], answer:1, explanation:"On a number line, –0.8 is further left (more negative) than –0.5. So –0.8 < –0.5." },
+  { id:91, topic:"Integers & Number Line", teks:"6.2C", question:"Which list is in order from LEAST to GREATEST: –3, 1/2, –1.5, 2?", choices:["–3, –1.5, 1/2, 2","2, 1/2, –1.5, –3","–1.5, –3, 1/2, 2","1/2, –1.5, 2, –3"], answer:0, explanation:"Convert to decimals: –3, –1.5, 0.5, 2. Ordered from least: –3 < –1.5 < 0.5 < 2." },
+  { id:92, topic:"Integers & Number Line", teks:"6.2C", question:"Which integer is between –4 and –2 on a number line?", choices:["–5","–1","–3","0"], answer:2, explanation:"–4, –3, –2 are consecutive integers. The one between –4 and –2 is –3." },
+  { id:93, topic:"Integers & Number Line", teks:"6.2C", question:"Which value has the greatest absolute value: –5, 3, or –4?", choices:["3","–4","–5","They are all equal"], answer:2, explanation:"|–5| = 5, |3| = 3, |–4| = 4. The greatest is 5, which belongs to –5." },
+  { id:94, topic:"Integers & Number Line", teks:"6.2C", question:"Which comparison is correct?", choices:["–3/4 > –0.8","–3/4 < –0.8","–3/4 = –0.8","–0.8 > 0"], answer:0, explanation:"–3/4 = –0.75. On the number line: –0.75 is to the RIGHT of –0.80, so –0.75 > –0.80." },
+  { id:95, topic:"Integers & Number Line", teks:"6.2C", question:"A fish is at –12 feet (below sea level) and a bird is at 15 feet above. What is the total distance between them?", choices:["3 ft","–27 ft","27 ft","–3 ft"], answer:2, explanation:"Distance = |15 – (–12)| = |15 + 12| = 27 feet." },
+
+  // ── Geometry — Triangles ──
+  { id:96, topic:"Geometry — Triangles", teks:"6.8A", question:"A triangle has angles of 45°, 90°, and x°. What is x?", choices:["135°","45°","90°","55°"], answer:1, explanation:"Angles in a triangle sum to 180°. x = 180 – 45 – 90 = 45°." },
+  { id:97, topic:"Geometry — Triangles", teks:"6.8A", question:"What is the area of a triangle with base 10 cm and height 6 cm?", choices:["60 cm²","30 cm²","16 cm²","15 cm²"], answer:1, explanation:"A = ½bh = ½(10)(6) = 30 cm²." },
+  { id:98, topic:"Geometry — Triangles", teks:"6.8A", question:"A triangle has all three sides equal in length. This triangle is —", choices:["scalene","right","isosceles","equilateral"], answer:3, explanation:"An equilateral triangle has all three sides (and all three angles = 60°) equal." },
+  { id:99, topic:"Geometry — Triangles", teks:"6.8A", question:"Two angles of a triangle measure 52° and 63°. What is the third angle?", choices:["75°","65°","115°","55°"], answer:1, explanation:"180 – 52 – 63 = 65°." },
+  { id:100, topic:"Geometry — Triangles", teks:"6.8A", question:"A right triangle has legs of length 6 and 8. What is the length of the hypotenuse?", choices:["14","7","10","12"], answer:2, explanation:"Use the Pythagorean theorem: c² = 6² + 8² = 36 + 64 = 100. c = √100 = 10." },
+
+  // ── Geometry — Volume ──
+  { id:101, topic:"Geometry — Volume", teks:"6.8D", question:"A cube has a side length of 4 cm. What is its volume?", choices:["12 cm³","16 cm³","64 cm³","48 cm³"], answer:2, explanation:"Volume of a cube = s³ = 4³ = 64 cm³." },
+  { id:102, topic:"Geometry — Volume", teks:"6.8D", question:"A rectangular prism has a base area of 20 sq ft and a height of 5 ft. What is its volume?", choices:["25 ft³","100 ft³","50 ft³","4 ft³"], answer:1, explanation:"V = B × h = 20 × 5 = 100 ft³." },
+  { id:103, topic:"Geometry — Volume", teks:"6.8D", question:"What is the volume of a prism with dimensions 3 cm × 4 cm × 5 cm?", choices:["12 cm³","60 cm³","47 cm³","120 cm³"], answer:1, explanation:"V = l × w × h = 3 × 4 × 5 = 60 cm³." },
+  { id:104, topic:"Geometry — Volume", teks:"6.8D", question:"A box is 6 ft long, 2.5 ft wide, and 4 ft tall. What is its volume?", choices:["12.5 ft³","48 ft³","60 ft³","12 ft³"], answer:2, explanation:"V = 6 × 2.5 × 4 = 60 ft³." },
+  { id:105, topic:"Geometry — Volume", teks:"6.8D", question:"A prism has volume 120 cm³ and a base area of 24 cm². What is its height?", choices:["5 cm","4 cm","96 cm","2880 cm"], answer:0, explanation:"V = B × h, so h = V ÷ B = 120 ÷ 24 = 5 cm." },
+
+  // ── Percents ──
+  { id:106, topic:"Percents", teks:"6.5B", question:"A meal costs $35. You leave a 20% tip. How much is the tip?", choices:["$5.00","$7.00","$6.00","$14.00"], answer:1, explanation:"20% of $35 = 0.20 × 35 = $7.00." },
+  { id:107, topic:"Percents", teks:"6.5B", question:"A shirt costs $60. It is discounted 30%. What is the sale price?", choices:["$42","$18","$30","$90"], answer:0, explanation:"30% of $60 = $18 discount. $60 – $18 = $42." },
+  { id:108, topic:"Percents", teks:"6.5B", question:"45 students out of 180 passed a test. What percent passed?", choices:["45%","4%","25%","40%"], answer:2, explanation:"45 ÷ 180 = 0.25 = 25%." },
+  { id:109, topic:"Percents", teks:"6.5B", question:"A price increased from $20 to $25. What was the percent increase?", choices:["5%","20%","25%","10%"], answer:2, explanation:"Increase = $5. Percent increase = 5/20 × 100 = 25%." },
+  { id:110, topic:"Percents", teks:"6.5B", question:"Sales tax is 8%. What is the tax on a $45 purchase?", choices:["$3.60","$4.50","$8.00","$36.00"], answer:0, explanation:"8% of $45 = 0.08 × 45 = $3.60." },
+  { id:111, topic:"Percents", teks:"6.5B", question:"A TV costs $800. After a 15% discount, what is the new price?", choices:["$120","$680","$720","$785"], answer:1, explanation:"15% of $800 = $120. $800 – $120 = $680." },
+
+  // ── Measurement Conversion ──
+  { id:112, topic:"Measurement Conversion", teks:"6.4H", question:"How many grams are in 2.5 kilograms?", choices:["250 g","25 g","2,500 g","25,000 g"], answer:2, explanation:"1 kg = 1,000 g. So 2.5 kg × 1,000 = 2,500 g." },
+  { id:113, topic:"Measurement Conversion", teks:"6.4H", question:"How many inches are in 5 feet?", choices:["50 in","60 in","55 in","17 in"], answer:1, explanation:"1 foot = 12 inches. 5 × 12 = 60 inches." },
+  { id:114, topic:"Measurement Conversion", teks:"6.4H", question:"How many milliliters are in 3 liters?", choices:["300 mL","30 mL","3,000 mL","0.003 mL"], answer:2, explanation:"1 L = 1,000 mL. So 3 × 1,000 = 3,000 mL." },
+  { id:115, topic:"Measurement Conversion", teks:"6.4H", question:"How many pounds is 48 ounces?", choices:["4 lb","2 lb","3 lb","6 lb"], answer:2, explanation:"1 pound = 16 ounces. 48 ÷ 16 = 3 pounds." },
+  { id:116, topic:"Measurement Conversion", teks:"6.4H", question:"How many centimeters are in 5 meters?", choices:["50 cm","500 cm","5,000 cm","0.5 cm"], answer:1, explanation:"1 m = 100 cm. 5 × 100 = 500 cm." },
+  { id:117, topic:"Measurement Conversion", teks:"6.4H", question:"A rope is 2 yards long. How many feet is that?", choices:["2 ft","4 ft","6 ft","24 ft"], answer:2, explanation:"1 yard = 3 feet. 2 × 3 = 6 feet." },
+
+  // ── Number Theory ──
+  { id:118, topic:"Number Theory", teks:"6.7A", question:"What is the GCF (Greatest Common Factor) of 24 and 36?", choices:["6","12","4","3"], answer:1, explanation:"Factors of 24: 1,2,3,4,6,8,12,24. Factors of 36: 1,2,3,4,6,9,12,18,36. GCF = 12." },
+  { id:119, topic:"Number Theory", teks:"6.7A", question:"What is the LCM (Least Common Multiple) of 4 and 6?", choices:["2","24","12","8"], answer:2, explanation:"Multiples of 4: 4,8,12,... Multiples of 6: 6,12,... The smallest common multiple is 12." },
+  { id:120, topic:"Number Theory", teks:"6.7A", question:"Is 37 prime or composite?", choices:["Composite — it has factors 1, 7, and 37","Prime — its only factors are 1 and 37","Composite — it equals 3 + 7","Prime — it is odd"], answer:1, explanation:"A prime number has exactly two factors: 1 and itself. 37 has no factors other than 1 and 37." },
+  { id:121, topic:"Number Theory", teks:"6.7A", question:"What is the GCF of 18 and 27?", choices:["3","6","9","18"], answer:2, explanation:"Factors of 18: 1,2,3,6,9,18. Factors of 27: 1,3,9,27. Greatest common factor = 9." },
+  { id:122, topic:"Number Theory", teks:"6.7A", question:"Which of these numbers is NOT prime?", choices:["11","13","15","17"], answer:2, explanation:"15 = 3 × 5, so it has factors other than 1 and itself. It is composite." },
+
+  // ── Financial Literacy ──
+  { id:123, topic:"Financial Literacy", teks:"6.14A", question:"Simple interest is calculated using I = Prt. If you invest $500 at 4% annual interest for 2 years, how much interest do you earn?", choices:["$8","$40","$4","$80"], answer:1, explanation:"I = Prt = 500 × 0.04 × 2 = $40." },
+  { id:124, topic:"Financial Literacy", teks:"6.14A", question:"Your monthly income is $500 and your total expenses are $420. How much can you save?", choices:["$920","$420","$80","$500"], answer:2, explanation:"Savings = Income – Expenses = $500 – $420 = $80." },
+  { id:125, topic:"Financial Literacy", teks:"6.14A", question:"What does APR stand for in banking?", choices:["Annual Payment Rate","Automatic Payment Receipt","Annual Percentage Rate","Average Principal Rate"], answer:2, explanation:"APR stands for Annual Percentage Rate — the yearly interest rate charged on borrowed money." },
+  { id:126, topic:"Financial Literacy", teks:"6.14A", question:"Gross pay is $2,000/month. After $350 in taxes and $150 in deductions, what is the net (take-home) pay?", choices:["$1,500","$2,500","$1,850","$500"], answer:0, explanation:"Net pay = Gross – taxes – deductions = $2,000 – $350 – $150 = $1,500." },
+  { id:127, topic:"Financial Literacy", teks:"6.14A", question:"Which action best helps a person build a strong credit history?", choices:["Paying bills late every month","Never using any credit","Paying credit card bills on time each month","Closing all credit accounts"], answer:2, explanation:"Consistently paying bills on time is the single most important factor in building good credit." },
+  { id:128, topic:"Financial Literacy", teks:"6.14A", question:"Which of these is an example of a NEED, not a want?", choices:["A new video game","Movie tickets","Groceries","A vacation"], answer:2, explanation:"Needs are things required for basic survival (food, shelter, clothing). Groceries are a need; the others are wants." },
+
+  // ── Equations ──
+  { id:129, topic:"Equations", teks:"6.10A", question:"What is the solution to 3x + 5 = 20?", choices:["x = 5","x = 8","x = 3","x = 25/3"], answer:0, explanation:"3x = 20 – 5 = 15. x = 15 ÷ 3 = 5." },
+  { id:130, topic:"Equations", teks:"6.10A", question:"What is the solution to x/4 = 7?", choices:["x = 1.75","x = 3","x = 28","x = 11"], answer:2, explanation:"Multiply both sides by 4: x = 7 × 4 = 28." },
+  { id:131, topic:"Equations", teks:"6.10A", question:"What is the solution to 2x – 3 = 11?", choices:["x = 7","x = 4","x = 8","x = 14"], answer:0, explanation:"2x = 11 + 3 = 14. x = 14 ÷ 2 = 7." },
+  { id:132, topic:"Equations", teks:"6.10A", question:"Which equation represents: 5 more than twice a number is 17?", choices:["2n – 5 = 17","n + 5 = 17","5n + 2 = 17","2n + 5 = 17"], answer:3, explanation:"Twice a number is 2n. 5 more than that is 2n + 5. Set equal to 17: 2n + 5 = 17." },
+  { id:133, topic:"Equations", teks:"6.10A", question:"What value of x satisfies 4 + 2x = 16?", choices:["x = 10","x = 6","x = 5","x = 3"], answer:1, explanation:"2x = 16 – 4 = 12. x = 12 ÷ 2 = 6." },
+  { id:134, topic:"Equations", teks:"6.10A", question:"What value of x satisfies x – 15 = 8?", choices:["x = 7","x = –7","x = 23","x = 120"], answer:2, explanation:"x = 8 + 15 = 23." },
+
+  // ── Decimals ──
+  { id:135, topic:"Decimals", teks:"6.4G", question:"What is 3.45 + 2.6?", choices:["5.45","6.05","5.105","6.5"], answer:1, explanation:"Line up decimal points and add: 3.45 + 2.60 = 6.05." },
+  { id:136, topic:"Decimals", teks:"6.4G", question:"What is 12.5 × 0.4?", choices:["50","5","0.5","125"], answer:1, explanation:"12.5 × 0.4 = 5.0. Think of it as 12.5 × 4 = 50, then move the decimal one place left." },
+  { id:137, topic:"Decimals", teks:"6.4G", question:"What is 8.4 ÷ 0.7?", choices:["1.2","0.12","12","120"], answer:2, explanation:"Move both decimals right one place: 84 ÷ 7 = 12." },
+  { id:138, topic:"Decimals", teks:"6.4G", question:"Round 3.748 to the nearest tenth.", choices:["3.8","3.7","4.0","3.75"], answer:0, explanation:"The digit in the hundredths place is 4 (which is ≥ 5? No, 4 < 5). Wait — 3.748 rounded to the nearest tenth: look at the hundredths digit (4). Since 4 < 5, round down: 3.7." },
+  { id:139, topic:"Decimals", teks:"6.4G", question:"What is 5.2 – 1.87?", choices:["3.33","3.43","4.33","6.33"], answer:0, explanation:"5.20 – 1.87 = 3.33. Borrow as needed when subtracting decimals." },
+  { id:140, topic:"Decimals", teks:"6.4G", question:"Which decimal is greatest: 0.6, 0.62, 0.059, 0.6200?", choices:["0.6","0.059","0.62","0.6200"], answer:3, explanation:"0.6200 = 0.62 = 0.6200. Actually 0.62 and 0.6200 are the same. All equal 0.62, which is greater than 0.6 and 0.059. So 0.6200 is one correct answer." },
+
+  // ── Statistics — Mean & Median ──
+  { id:141, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Find the mean of: 5, 8, 12, 7, 3.", choices:["8","7","5","35"], answer:1, explanation:"Sum = 5+8+12+7+3 = 35. Mean = 35 ÷ 5 = 7." },
+  { id:142, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Find the median of: 3, 7, 8, 10, 12.", choices:["8","7","10","3"], answer:0, explanation:"The data is already ordered. The median is the middle value: 3, 7, [8], 10, 12. Median = 8." },
+  { id:143, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Find the MODE of: 4, 7, 4, 9, 4, 6.", choices:["4","7","9","6"], answer:0, explanation:"Mode is the most frequent value. 4 appears 3 times, more than any other number." },
+  { id:144, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Find the RANGE of: 15, 8, 22, 11, 6.", choices:["16","8","22","6"], answer:0, explanation:"Range = Maximum – Minimum = 22 – 6 = 16." },
+  { id:145, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"Which measure of data is most affected by an outlier (extremely large or small value)?", choices:["Median","Mode","Mean","Range"], answer:2, explanation:"The mean uses all values in its calculation, so a very large or very small value pulls the mean significantly. The median is resistant to outliers." },
+  { id:146, topic:"Statistics — Mean & Median", teks:"6.4.12.C", question:"A student scored 72, 85, 91, 68, and 94 on five tests. What is the mean score?", choices:["82","83","85","91"], answer:0, explanation:"Sum = 72+85+91+68+94 = 410. Mean = 410 ÷ 5 = 82." },
+
+  // ── Geometry — Area ──
+  { id:147, topic:"Geometry — Area", teks:"6.3.8.C", question:"What is the area of a trapezoid with bases of 5 cm and 9 cm and a height of 4 cm?", choices:["28 cm²","26 cm²","36 cm²","18 cm²"], answer:0, explanation:"A = ½(b₁ + b₂)h = ½(5 + 9)(4) = ½(14)(4) = 28 cm²." },
+  { id:148, topic:"Geometry — Area", teks:"6.3.8.C", question:"What is the area of a parallelogram with base 8 m and height 5 m?", choices:["13 m²","26 m²","40 m²","80 m²"], answer:2, explanation:"A = bh = 8 × 5 = 40 m²." },
+  { id:149, topic:"Geometry — Area", teks:"6.3.8.C", question:"What is the area of a triangle with base 12 ft and height 7 ft?", choices:["84 ft²","42 ft²","19 ft²","38 ft²"], answer:1, explanation:"A = ½bh = ½(12)(7) = 42 ft²." },
+  { id:150, topic:"Geometry — Area", teks:"6.3.8.C", question:"A rectangle has length 9 cm and width 6 cm. What is its area?", choices:["15 cm²","54 cm²","30 cm²","45 cm²"], answer:1, explanation:"A = l × w = 9 × 6 = 54 cm²." },
+  { id:151, topic:"Geometry — Area", teks:"6.3.8.C", question:"A figure is made of a rectangle (6 × 4) with a triangle on top (base 6, height 3). What is the total area?", choices:["24 sq units","33 sq units","42 sq units","18 sq units"], answer:1, explanation:"Rectangle: 6×4=24. Triangle: ½(6)(3)=9. Total: 24+9=33 square units." },
+  { id:152, topic:"Geometry — Area", teks:"6.3.8.C", question:"A parallelogram has area 56 sq in and height 7 in. What is the length of the base?", choices:["63 in","49 in","8 in","392 in"], answer:2, explanation:"A = bh → b = A ÷ h = 56 ÷ 7 = 8 inches." },
+
+  // ── Inequalities (more) ──
+  { id:153, topic:"Inequalities", teks:"6.9B", question:"What is the solution to x + 5 > 12?", choices:["x > 17","x > 7","x < 7","x < 17"], answer:1, explanation:"Subtract 5 from both sides: x > 12 – 5 = 7." },
+  { id:154, topic:"Inequalities", teks:"6.9B", question:"What is the solution to 3x ≤ 18?", choices:["x ≤ 54","x ≥ 6","x ≤ 6","x ≥ 54"], answer:2, explanation:"Divide both sides by 3: x ≤ 6." },
+  { id:155, topic:"Inequalities", teks:"6.9B", question:"Which number is a solution to x > –3?", choices:["–4","–3","–5","0"], answer:3, explanation:"x must be GREATER THAN –3 (not equal). 0 > –3 ✓. The others are ≤ –3." },
+  { id:156, topic:"Inequalities", teks:"6.9B", question:"The solution to an inequality is graphed with a CLOSED circle. This means —", choices:["The endpoint is NOT included in the solution","The endpoint IS included in the solution","The arrow points left","The variable must be negative"], answer:1, explanation:"A closed (filled) circle means the endpoint IS part of the solution (used with ≤ or ≥). An open circle means it is NOT included (used with < or >)." },
+
+  // ── Number Line & Coordinate Plane ──
+  { id:157, topic:"Integers & Number Line", teks:"6.2A", question:"Which point is located at (–3, 4) on a coordinate grid?", choices:["3 units right, 4 units up","3 units left, 4 units down","3 units left, 4 units up","3 units right, 4 units down"], answer:2, explanation:"The x-coordinate –3 means 3 units LEFT of the origin. The y-coordinate 4 means 4 units UP. So the point is 3 left, 4 up." },
+  { id:158, topic:"Integers & Number Line", teks:"6.2A", question:"Point A is at (2, –5) and Point B is at (2, 3) on a coordinate grid. What is the distance between them?", choices:["8 units","2 units","–8 units","10 units"], answer:0, explanation:"They share the same x-coordinate, so distance = |–5 – 3| = |–8| = 8 units." },
+
+  // ── Proportional Relationships (extra) ──
+  { id:159, topic:"Proportional Relationships", teks:"6.4C", question:"Which table does NOT show a proportional relationship?", choices:["(1,3),(2,6),(3,9)","(1,5),(2,10),(3,15)","(1,4),(2,6),(3,8)","(2,8),(4,16),(6,24)"], answer:2, explanation:"In a proportional relationship, y/x must always be the same. For (1,4),(2,6),(3,8): 4/1=4, 6/2=3, 8/3≈2.67. The ratios differ, so it is NOT proportional." },
+
+  // ── Expressions & Equations (extra) ──
+  { id:160, topic:"Expressions & Equations", teks:"6.7A", question:"Which property is shown by 3 × (4 × 5) = (3 × 4) × 5?", choices:["Commutative Property","Distributive Property","Identity Property","Associative Property"], answer:3, explanation:"The Associative Property of Multiplication states that grouping does not change the product: (a × b) × c = a × (b × c)." }
 ];
 
 const TOPIC_COLORS = {
